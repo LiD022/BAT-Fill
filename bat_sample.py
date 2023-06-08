@@ -10,20 +10,21 @@ import argparse
 from models.bat_model import GPT, GPTConfig
 from models.networks.generator import UpsamplerGenerator
 
+
 parser = argparse.ArgumentParser(description='PyTorch Template')
 
-parser.add_argument('--num_sample', type=int, default=1, help='input batch size')
-parser.add_argument('--tran_model', type=str, default='celebahq_bat', help='name of BAT model')
-parser.add_argument('--up_model', type=str, default='celebahq_up', help='name of upsampler model')
-parser.add_argument('--input_dir', type=str, help='dir of input images, png foramt is hardcoded in line 121, please modify if needed.')
-parser.add_argument('--mask_dir', type=str, help='dir of masks, filename should match with input images')
-parser.add_argument('--save_dir', type=str, help='dir for saving results')
+parser.add_argument('--num_sample', type=int, default=3, help='input batch size')
+parser.add_argument('--tran_model', type=str, default='celebahq_bat_pretrain', help='name of BAT model')
+parser.add_argument('--up_model', type=str, default='celebahq_up_pretrain', help='name of upsampler model')
+parser.add_argument('--input_dir', type=str, default='../inference/image',help='dir of input images, png format is hardcoded in line 121, please modify if needed.')
+parser.add_argument('--mask_dir', type=str, default='../inference/mask',help='dir of masks, filename should match with input images')
+parser.add_argument('--save_dir', type=str, default='../inference/res',help='dir for saving results')
 
 args = parser.parse_args()
 def imread_torch(path, mask_dir, size=256):
-    img = torch.from_numpy(np.array(Image.open(p).resize([size,size], Image.BICUBIC)))
+    img = torch.from_numpy(np.array(Image.open(p).resize([size,size], Image.Resampling.BICUBIC)))
     img = img.permute(2,0,1)/127.5 - 1.
-    mask = torch.from_numpy(np.array(Image.open(os.path.join(mask_dir, p.split('/')[-1])).resize([size,size], Image.NEAREST)))
+    mask = torch.from_numpy(np.array(Image.open(os.path.join(mask_dir, p.split('/')[-1])).resize([size,size], Image.Resampling.BICUBIC)))
     mask = (mask > 0).float()
     if len(mask.shape) == 3:
         mask = mask[:,:,0]
@@ -126,7 +127,7 @@ if __name__=="__main__":
         quant_gens = masked_sample(model, quant_imgs.repeat(num_sample,1).cuda(), mask_32.repeat(num_sample,1).cuda(), sample=True, top_k=50)
         masked_img = torch.cat([masked_img, mask], 1)
         for i in range(num_sample):
-            sample = dequantize(quant_gens[i])
+            sample = dequantize(quant_gens[i].detach().cpu())
             sample_tensor =  torch.from_numpy(sample).permute(2,0,1).unsqueeze(0).float()
             sample_tensor = sample_tensor/127.5 -1
             
