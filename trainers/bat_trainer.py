@@ -42,7 +42,7 @@ class Trainer:
         self.train_dataset = train_dataset
         self.test_dataset = test_dataset
         self.config = config
-        self.cluster = torch.from_numpy(np.load('./kmeans_centers.npy'))
+        self.cluster = torch.from_numpy(np.load('/home/nikita/Desktop/diploma/BAT-Fill/models/kmeans_centers.npy'))
         # take over whatever gpus are on the system
         self.device = 'cpu'
         if torch.cuda.is_available():
