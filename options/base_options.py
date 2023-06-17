@@ -41,10 +41,10 @@ class BaseOptions():
         parser.add_argument('--output_nc', type=int, default=3, help='# of output image channels')
 
         # for inputs setting
-        parser.add_argument('--dataroot', type=str, default='./datasets/cityscapes/')
+        parser.add_argument('--dataroot', type=str, default='./flist')
         parser.add_argument('--dataset_mode', type=str, default='texture_inpaint')
-        parser.add_argument('--dataset_name', type=str, default='celebahq')
-        parser.add_argument('--mask_type', type=int, default='1', help='1: square, 2: random paint, 3: external, 4: external + square, 5: external + square + random paint')
+        parser.add_argument('--dataset_name', type=str, default='lfw')
+        parser.add_argument('--mask_type', type=int, default='6', help='1: square, 2: random paint, 3: external, 4: external + square, 5: external + square + random paint')
         parser.add_argument('--pconv_level', type=int, default=0, help='level of pconv masks')
         parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
         parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the images for data argumentation')
