@@ -13,9 +13,9 @@ from models.networks.generator import UpsamplerGenerator
 
 parser = argparse.ArgumentParser(description='PyTorch Template')
 
-parser.add_argument('--num_sample', type=int, default=3, help='input batch size')
-parser.add_argument('--tran_model', type=str, default='celebahq_bat_pretrain', help='name of BAT model')
-parser.add_argument('--up_model', type=str, default='celebahq_up_pretrain', help='name of upsampler model')
+parser.add_argument('--num_sample', type=int, default=5, help='number of samples to generate')
+parser.add_argument('--tran_model', type=str, default='pretrain_bat', help='name of BAT model')
+parser.add_argument('--up_model', type=str, default='modify_up', help='name of upsampler model')
 parser.add_argument('--input_dir', type=str, default='../inference/image',help='dir of input images, png format is hardcoded in line 121, please modify if needed.')
 parser.add_argument('--mask_dir', type=str, default='../inference/mask',help='dir of masks, filename should match with input images')
 parser.add_argument('--save_dir', type=str, default='../inference/res',help='dir for saving results')
@@ -37,7 +37,7 @@ def create_dir(path):
         os.makedirs(path)
 
 
-cluster = torch.from_numpy(np.load('./kmeans_centers.npy'))
+cluster = torch.from_numpy(np.load('/home/nikita/Desktop/diploma/BAT-Fill/models/kmeans_centers.npy'))
 def color_quantize(x):
         # x (3,32,32)
         xpt = x.float().permute(1,2,0).contiguous().view(-1, 3)

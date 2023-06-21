@@ -26,7 +26,7 @@ opt.phase = 'train'
 block_size = opt.load_size ** 2
 vocab_size = 512
 mconf = GPTConfig(vocab_size, block_size*2,
-                  embd_pdrop=0.0, resid_pdrop=0.0, attn_pdrop=0.0,
+                  embd_pdrop=0.1, resid_pdrop=0.1, attn_pdrop=0.1,
                   n_layer=24, n_head=8, n_embd=512, ar_bert_loss=True)
 
 model = GPT(mconf)

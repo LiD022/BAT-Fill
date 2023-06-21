@@ -178,7 +178,7 @@ class Trainer:
             with open(self.log_name, "a") as log_file:
                 log_file.write('%s\n' % message)
 
-            np.savetxt(self.iter_record_path, (epoch+1, self.tokens),
+            np.savetxt(self.iter_record_path, (epoch+1, self.tokens.cpu()),
                    delimiter=',', fmt='%d')
             # supports early stopping based on the test loss, or just save always if no test set is provided
             good_model = self.test_dataset is None or test_loss < best_loss
