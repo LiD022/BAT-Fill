@@ -194,14 +194,17 @@ class TextureInpaintDataset(BaseDataset):
         # mask for low face area
         if mask_type == 6:
             m = np.zeros((self.h, self.w)).astype(np.uint8)
-            if np.random.binomial(1, 0.3) == 1:
+            if np.random.binomial(1, 0.1) == 1:
                 t, l = random.randint(3*self.h//8, 3.5*self.h//8), random.randint(1.5*self.w//8, 2*self.w//8)
                 m[t:t+self.h//2, l:l+self.w//2] = 255
             else:
-                for _ in range(10):
-                    t1, l1 = random.randint(3.5*self.h//8, 4.5*self.h//8), random.randint(2*self.w//8, 3*self.w//8)
-                    t2, l2 = random.randint(6*self.h//8, 7*self.h//8), random.randint(6*self.w//8, 7*self.w//8)
-                    m[t1:t2, l1:l2] = 255
+                t1, l1 = random.randint(4.5*self.h//8, 5*self.h//8), random.randint(1*self.w//8, 2*self.w//8)
+                t2, l2 = random.randint(7*self.h//8,  7.5*self.h//8), random.randint(6*self.w//8, 7*self.w//8)
+                m[t1:t1+(t2-t1)//3, l1:l2] = 255
+                l3, l4 = random.randint(1.5*self.w//8, 2.5*self.w//8), random.randint(5.5*self.w//8, 6.5*self.w//8)
+                m[t1+(t2-t1)//3:t1+2*(t2-t1)//3, l3:l4] = 255
+                l5, l6 = random.randint(2*self.w//8, 3*self.w//8), random.randint(5*self.w//8, 6*self.w//8)
+                m[t1+2*(t2-t1)//3:t2, l5:l6] = 255
             return m
 
 

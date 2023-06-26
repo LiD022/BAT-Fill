@@ -13,12 +13,12 @@ from models.networks.generator import UpsamplerGenerator
 
 parser = argparse.ArgumentParser(description='PyTorch Template')
 
-parser.add_argument('--num_sample', type=int, default=5, help='number of samples to generate')
+parser.add_argument('--num_sample', type=int, default=10, help='number of samples to generate')
 parser.add_argument('--tran_model', type=str, default='pretrain_bat', help='name of BAT model')
-parser.add_argument('--up_model', type=str, default='modify_up', help='name of upsampler model')
-parser.add_argument('--input_dir', type=str, default='../inference/image',help='dir of input images, png format is hardcoded in line 121, please modify if needed.')
-parser.add_argument('--mask_dir', type=str, default='../inference/mask',help='dir of masks, filename should match with input images')
-parser.add_argument('--save_dir', type=str, default='../inference/res',help='dir for saving results')
+parser.add_argument('--up_model', type=str, default='pretrain_up', help='name of upsampler model')
+parser.add_argument('--input_dir', type=str, default='../norm/image',help='dir of input images, png format is hardcoded in line 121, please modify if needed.')
+parser.add_argument('--mask_dir', type=str, default='../norm/mask',help='dir of masks, filename should match with input images')
+parser.add_argument('--save_dir', type=str, default='../norm/res2',help='dir for saving results')
 
 args = parser.parse_args()
 def imread_torch(path, mask_dir, size=256):
