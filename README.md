@@ -19,15 +19,13 @@ In this work, we use CelebA-HQ (Download availbale [here](https://github.com/swi
 
 ## Testing with Pre-trained Models
 
-1. Download pre-trained models: 
+1. Download pre-trained models: (Здесь будет лежать одна ссылка на яндекс диск, в котором будут загружены все модели)
+https://disk.yandex.ru/d/yHUAVJHOknm0vw
 
-- CelebA-HQ: [BAT](https://drive.google.com/file/d/1C0yQy4mUarxP5ym0aXyCf2Or_rbdWek0/view?usp=sharing) ; [Upsmapler](https://drive.google.com/file/d/1W1f286VrKJF9E8hbE9B5ivoZ67_1ikVg/view?usp=sharing)
-- Places2: [BAT](https://drive.google.com/file/d/11LGiqd1rutYBN8FIz49hpukMuwN-MSeA/view?usp=sharing) ; [Upsmapler](https://drive.google.com/file/d/1xf4ZNOdB8WfuPFypg_wl1GnV__qAyKQr/view?usp=sharing)
-- Paris-StreetView: [BAT](https://drive.google.com/file/d/1yhRT9TCkBznw6_K4nrED778qoR8DS4DZ/view?usp=sharing) ; [Upsmapler](https://drive.google.com/file/d/1gitMXnJN282S7PP3qOSqrscP_EoE8MWd/view?usp=sharing)
-2. Put the pre-trained model under the checkpoints folder, e.g.
+3. Put the pre-trained model under the checkpoints folder, e.g.
 ```
     checkpoints
-        ├── celebahq_bat_pretrain
+        ├── modify_up
             ├── latest_net_G.pth 
 ```
 3. Prepare the input images and masks to test.
